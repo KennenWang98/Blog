@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.demo.mapper.PhotoLISTMapper">
+    <resultMap id="result" type="com.blog.demo.entity.PhotoLIST">
+        <result property="photo_title" column="photo_title" />
+        <result property="photo_url" column="photo_url" />
+
+    </resultMap>
+
+    <select id="ListPhotoLIST" resultMap="result">
+		SELECT * FROM photo_list
+	</select>
+
+    <select id="findPhotoLISTByTitle" resultMap="result">
+		SELECT * FROM photo_list where photo_title=#{photo_title}
+	</select>
+
+    <insert id="insertPhotoLIST" parameterType="com.blog.demo.entity.PhotoLIST"
+            keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO photo_list
+		(
+		id,photo_title,photo_url
+		)
+		VALUES (
+		#{id},
+		#{photo_title, jdbcType=VARCHAR},
+		#{photo_url, jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <delete id="delete" parameterType="int">
+		delete from photo_list where id=#{id}
+	</delete>
+
+    <update id="Update" parameterType="com.blog.demo.entity.PhotoLIST">
+	update photo_list set photo_list.photo_title=#{photo_title},photo_list.photo_url=#{photo_url} where photo_list.id=#{id}
+	</update>
+</mapper>

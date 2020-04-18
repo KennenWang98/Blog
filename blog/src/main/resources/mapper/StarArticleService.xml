@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.demo.mapper.StarArticleMapper">
+    <resultMap id="result" type="com.blog.demo.entity.StarArticle">
+        <result property="title" column="title" />
+        <result property="article_id" column="article_id" />
+    </resultMap>
+
+    <select id="ListStarArticle" resultMap="result">
+		SELECT * FROM star_articles
+	</select>
+
+    <select id="findStarArticleByID" resultMap="result">
+		SELECT * FROM star_articles where id=#{id}
+	</select>
+
+    <insert id="insertStarArticle" parameterType="com.blog.demo.entity.StarArticle"
+            keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO star_articles
+		(
+		id,title,artilce_id
+		)
+		VALUES (
+		#{id},
+		#{title, jdbcType=VARCHAR},
+		#{article_id}
+		)
+	</insert>
+
+    <delete id="delete" parameterType="int">
+		delete from star_articles where id=#{id}
+	</delete>
+
+    <update id="Update" parameterType="com.blog.demo.entity.StarArticle">
+	update star_articles set star_articles.title=#{title},star_articles.article_id=#{article_id} where star_articles.id=#{id}
+	</update>
+</mapper>
