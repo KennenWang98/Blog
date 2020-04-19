@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface PhotoLISTMapper {
-    List<PhotoLIST> findPhotoLISTByTitle(String photo_title);
+    List<PhotoLIST> findPhotoLISTByID(int id);
 
     public List<PhotoLIST> ListPhotoLIST();
 

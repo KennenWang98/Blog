@@ -17,12 +17,15 @@
       <div class="main" style="height: 100%; width: 1000px; margin: 0  auto;">
         <article class="articleBox">
           <div class="article">
-            <div class="title">
-              <h2>{{Title}}</h2>
-            </div>
-            <div class="info">
-              <span>上传：{{Writer}}</span>
-              <span class="time">{{Time}}</span>
+            <div class="info_Photo" v-for="info in infos" :key="info.photo_title"
+            v-bind:photo_title="info.photo_title" v-bind:writer="info.writer" v-bind:time="info.time">
+              <div class="title">
+                <h2>{{info.photo_title}}</h2>
+              </div>
+              <div class="info">
+                <span>上传：{{info.writer}}</span>
+                <span class="time">{{info.time}}</span>
+              </div>
             </div>
             <div class="photo_con" style="padding: 20px 0 0 0"
                  v-for="photo in photos" :key="photo.id"
@@ -52,18 +55,16 @@
 </template>
 
 <script>
-  import {requestSearchPhotos} from "../../api/api";
+  import {requestSearchPhotoLIST, requestSearchPhotos} from "../../api/api";
   import axios from 'axios';
 
   export default {
     name: "ARTICLE",
     data(){
       return{
-        Title: "《野良神》舞台剧剧照",
-        Writer: "破音楠",
-        Time: "2020-3-25",
         photos:[],
-        stars:[]
+        stars:[],
+        infos:[]
       }
     },
     mounted:function() {
@@ -83,10 +84,26 @@
           }
         });
 
+      let searchPhotoList = {id: list_id_in}
+      //console.log(searchPhotos)
+      requestSearchPhotoLIST(searchPhotoList).then(data =>{
+        console.log(data)
+        let status = data.status;
+        let msg = data.msg;
+        this.infos = data.data;
+        //console.log(this.photos)
+        if (status !== 200) {
+          this.$message({
+            message: msg,
+          });
+        }
+      });
+
+
       let _this = this
       axios.get('/new/StarArticleController/ListStarArticle')
         .then(function(res){
-          console.log(res)
+          //console.log(res)
           _this.stars = res.data
         })
         .catch(function(error){

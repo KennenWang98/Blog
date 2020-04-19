@@ -13,20 +13,22 @@
 		SELECT * FROM photo_list
 	</select>
 
-    <select id="findPhotoLISTByTitle" resultMap="result">
-		SELECT * FROM photo_list where photo_title=#{photo_title}
+    <select id="findPhotoLISTByID" resultMap="result">
+		SELECT * FROM photo_list where id=#{id}
 	</select>
 
     <insert id="insertPhotoLIST" parameterType="com.blog.demo.entity.PhotoLIST"
             keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO photo_list
 		(
-		id,photo_title,photo_url
+		id,photo_title,photo_url,writer,time
 		)
 		VALUES (
 		#{id},
 		#{photo_title, jdbcType=VARCHAR},
-		#{photo_url, jdbcType=VARCHAR}
+		#{photo_url, jdbcType=VARCHAR},
+		#{writer, jdbcType=VARCHAR},
+		#{time, jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -35,6 +37,6 @@
 	</delete>
 
     <update id="Update" parameterType="com.blog.demo.entity.PhotoLIST">
-	update photo_list set photo_list.photo_title=#{photo_title},photo_list.photo_url=#{photo_url} where photo_list.id=#{id}
+	update photo_list set photo_list.photo_title=#{photo_title},photo_list.photo_url=#{photo_url},photo_list.writer=#{writer},photo_list.time=#{time} where photo_list.id=#{id}
 	</update>
 </mapper>

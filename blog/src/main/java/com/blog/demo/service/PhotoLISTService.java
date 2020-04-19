@@ -14,8 +14,8 @@ public class PhotoLISTService {
     @Autowired
     private PhotoLISTMapper photoLISTMapper;
 
-    public List<PhotoLIST> findPhotoLISTByTitle(String photo_title) {
-        return photoLISTMapper.findPhotoLISTByTitle(photo_title);
+    public List<PhotoLIST> findPhotoLISTByID(int id) {
+        return photoLISTMapper.findPhotoLISTByID(id);
     }
 
     public PhotoLIST insertPhotoLIST(PhotoLIST photoLIST) {

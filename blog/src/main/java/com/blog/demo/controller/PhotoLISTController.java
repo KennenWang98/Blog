@@ -3,10 +3,8 @@ package com.blog.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import com.blog.demo.entity.PhotoLIST;
 import com.blog.demo.service.PhotoLISTService;
@@ -49,9 +47,9 @@ public class PhotoLISTController {
         return photoLISTservice.ListPhotoLIST();
     }
 
-    @RequestMapping("/ListPhotoLISTByListID")
-    @ResponseBody
-    public List<PhotoLIST> ListPhotoLISTByTitle(String photo_title){
-        return photoLISTservice.findPhotoLISTByTitle(photo_title);
+    @RequestMapping(value = "/ListPhotoLISTByID",method = RequestMethod.GET)
+
+    public List<PhotoLIST> ListPhotoLISTByID(@RequestParam int id){
+        return photoLISTservice.findPhotoLISTByID(id);
     }
 }

@@ -165,12 +165,22 @@
           console.log(key, keyPath);
         },
       },
-      // created(){
+      // mounted(){
       //   let _this = this
       //   axios.get('/new/ArticleLISTController/ListArticleLIST')
       //     .then(function(res){
       //       _this.articles = res.data
       //       console.log(res.data)
+      //       this.scrollReveal.reveal('.reveal_article',{
+      //         duration: 1000,
+      //         delay: 500,
+      //         origin:'bottom',
+      //         reset:true,
+      //         distance:'200px',
+      //         opacity:0.001,
+      //         easing:'linear',
+      //         scale: 0.9,
+      //       });
       //     })
       //     .catch(function(error){
       //       console.log(error);
